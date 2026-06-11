@@ -298,7 +298,7 @@ export default function Weather() {
                             </div>
                             <div className="my-4 flex items-center gap-3">
                                 <span className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium">WSW</span>
-                                <p className="text-sm text-white/80">Wind direction</p>
+                                <p className=" text-white/80">Wind direction</p>
                             </div>
                         </div>
 
