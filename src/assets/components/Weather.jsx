@@ -13,6 +13,7 @@ import PolarChart from "./PolarChart";
 import humidity from '../images/humidity.png'
 import sunrise from '../images/sunrise.png';
 import sunset from '../images/sunset.png';
+import icon_wind from '../images/icon_wind.png'
 
 const cities = [
     "Phnom Penh",
@@ -49,6 +50,8 @@ export default function Weather() {
     const [unit, setUnit] = useState('C');
     const [currentWeather, setCurrentWeather] = useState(null);
 
+
+    
     useEffect(() => {
         if (city) {
             handleSearch();
@@ -117,6 +120,8 @@ export default function Weather() {
         console.log("weatherData", weatherData);
     }
 
+
+
     return (
         <div className=" w-full h-auto rounded-3xl flex">
             {/* Left div */}
@@ -155,8 +160,6 @@ export default function Weather() {
                         ))}
                     </select>
                 </div>
-
-                
 
                 {/* Weather image */}
                 <div className="flex justify-center items-center">
@@ -204,14 +207,14 @@ export default function Weather() {
                     </div>
                 </div>
 
-                {/* image at the end */}
-                <div className="w-full h-44 overflow-hidden mt-18 px-4 relative rounded-2xl">
+                {/* image */}
+                <div className="w-full h-65  overflow-hidden mt-18 px-4 relative rounded-2xl">
                     <img
                         className="w-full h-full object-cover rounded-2xl"
                         src={PhnomPenh}
                         alt="PhnomPenh"
                     />
-                    <div className="absolute inset-0 bg-black/60 rounded-2xl mx-4"></div>
+                    <div className="absolute inset-0 bg-black/60 rounded-2xl mx-4 "></div>
                     <p className="absolute inset-0 flex items-center justify-center text-white text-xl font-bold">
                         Hello, {city || 'Select a city'}
                     </p>
@@ -220,7 +223,7 @@ export default function Weather() {
 
             {/* Right div */}
 
-            <div className="bg-gray-100 w-[75%] h-full px-8 py-4">
+            <div className=" w-[75%] h-full px-8 py-4">
                 <div className="w-full h-12 flex  ">
                     <div className="h-full w-[80%] flex gap-6 items-center pl-4">
                         <h2 className="border-b-2 border-black pb-1 ">Today</h2>
@@ -245,7 +248,7 @@ export default function Weather() {
 
                     </div>
                 </div>
-                <div className="relative w-full h-80 mt-4 flex items-center justify-center bg-cover bg-center rounded-2xl overflow-hidden "
+                <div className="relative w-full h-60 mt-4 flex items-center justify-center bg-cover bg-center rounded-2xl overflow-hidden "
                     style={{ backgroundImage: `url(${bg})` }}>
                     {/* dark overlay */}
 
@@ -267,15 +270,19 @@ export default function Weather() {
                     </div>
                 </div>
 
-                <div className="bg-purple-200 w-full h-200 pr-0">
-                    <p className="py-8 text-3xl">Today's Highlight</p>
-                    <div className="grid grid-cols-3 gap-y-16 gap-10">
-                        <div className="bg-red-200 h-64 rounded-2xl p-4 flex flex-col">
-                            <h2 className="text-center text-lg">UV Index</h2>
-                            <div className="flex-1 min-h-0 flex items-center justify-center">
+                <div className=" w-full h-200 ">
+                    <p className="py-6 text-3xl text-bold">Today's Highlight</p>
+                    <div className="grid grid-cols-3 gap-y-14 gap-14">
+                        {/* UV indexcard */}
+
+                        <div style={{}} className="bg-pink-200 h-56 rounded-2xl p-4 flex flex-col">
+                            <h2 className="text-lg font-semibold text-center text-white ">UV Index</h2>
+                            <div className="flex-1 min-h-0 flex  items-center justify-center">
                                 <PolarChart />
                             </div>
                         </div>
+                        {/* Wind card */}
+
                         <div className="bg-linear-to-br from-red-500 via-fuchsia-500 to-orange-500 h-56 rounded-2xl p-6 text-white shadow-xl">
                             <h2 className="text-lg font-semibold">Wind Status</h2>
                             <div className="mt-4 flex items-center justify-between">
@@ -286,7 +293,7 @@ export default function Weather() {
                                     <p className="text-sm text-white/80 mt-2">Current wind speed</p>
                                 </div>
                                 <div className="rounded-3xl bg-white/20 p-3">
-                                    <img className="w-10 h-10" src={humidity} alt="humidity" />
+                                    <img className="w-10 h-10" src={icon_wind} alt="icon_wind" />
                                 </div>
                             </div>
                             <div className="my-4 flex items-center gap-3">
@@ -295,7 +302,7 @@ export default function Weather() {
                             </div>
                         </div>
 
-
+                        {/* Sunrise&sunset card */}
                         <div className="bg-linear-to-br from-red-500 via-fuchsia-500 to-orange-500 h-56 rounded-2xl p-6 text-white shadow-xl">
                             <h2 className="text-lg font-semibold">Sunrise & Sunset</h2>
                             <div className="my-2 flex items-center justify-items-start">
@@ -320,8 +327,74 @@ export default function Weather() {
                             </div>
                         </div>
 
-                        {/* <div className="bg-red-500 h-64 pl-6 pt-4 rounded-2xl"></div>
-                        <div className="bg-red-500 h-64 rounded-2xl"></div> */}
+                        {/* Humindity card */}
+                    <div className="bg-linear-to-br from-blue-500 via-cyan-500 to-sky-400 h-56 rounded-2xl p-6 text-white shadow-xl">
+                        <h2 className="text-lg font-semibold">Humidity</h2>
+
+                        <div className="mt-4 flex items-center justify-between">
+                            <div>
+                                <p className="text-4xl font-bold">
+                                    {currentWeather ? `${currentWeather.humidity}%` : '...'}
+                                </p>
+                                <p className="text-sm text-white/80 mt-2">
+                                    Current humidity level
+                                </p>
+                            </div>
+
+                            <div className="rounded-3xl bg-white/20 p-3">
+                                <img className="w-10 h-10" src={humidity} alt="humidity" />
+                            </div>
+                        </div>
+
+                        <div className="my-4 flex items-center gap-3">
+                                <span className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium">
+                                    {currentWeather
+                                        ? currentWeather.humidity < 30
+                                            ? 'Dry'
+                                            : currentWeather.humidity < 60
+                                            ? 'Comfortable'
+                                            : 'Humid'
+                                        : '...'}
+                                </span>
+                                <p className="text-sm text-white/80">
+                                    Air moisture level
+                                </p>
+                        </div>
+                    </div>
+
+                        {/* Visibility card */}
+                        <div className="bg-linear-to-br from-red-500 via-fuchsia-500 to-orange-500 h-56 rounded-2xl p-6 text-white shadow-xl">
+                            <h2 className="text-lg font-semibold">Visibility</h2>
+                            <div className="mt-4 flex items-center justify-between">
+                                <div>
+                                    <p className="text-4xl font-bold">
+                                        {currentWeather ? `${Math.round(currentWeather.windspeed)} km` : '...'}
+                                    </p>
+                                    <p className="text-sm text-white/80 mt-2">Current visibility speed</p>
+                                </div>
+                               
+                            </div>
+                            <div className="my-4 flex items-center gap-3">
+                                <span className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium">Visibility</span>
+                            </div>
+                        </div>
+                        {/* Air Quality card */}
+
+                        <div className="bg-linear-to-br from-red-500 via-fuchsia-500 to-orange-500 h-56 rounded-2xl p-6 text-white shadow-xl">
+                            <h2 className="text-lg font-semibold">Air Quality</h2>
+                            <div className="mt-4 flex items-center justify-between">
+                                <div>
+                                    <p className="text-4xl font-bold">
+                                        {currentWeather ? `${Math.round(currentWeather.windspeed)} ` : '...'}
+                                    </p>
+                                    <p className="text-sm text-white/80 mt-2">Current air quality</p>
+                                </div>    
+                            </div>
+                            <div className="my-4 flex items-center gap-3">
+                                <span className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium">Air quality</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
