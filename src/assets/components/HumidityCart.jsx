@@ -16,15 +16,17 @@ ChartJS.register(
   Legend
 );
 
-export default function HumidityChart({ humidity = 0 }) {
+export default function HumidityChart({ humidity }) {
   const chartData = {
     labels: ["Humidity"],
+
     datasets: [
       {
         label: "Humidity (%)",
-        data: [humidity],
-        backgroundColor: ["rgba(59, 130, 246, 0.8)"],
-        borderColor: ["#3b82f6"],
+        data: [humidity || 0],
+
+        backgroundColor: ["rgba(236, 72, 153, 0.8)"], // your old pink
+        borderColor: ["#ec4899"],
         borderWidth: 2,
         borderRadius: 8,
       },
@@ -42,7 +44,7 @@ export default function HumidityChart({ humidity = 0 }) {
       },
       tooltip: {
         callbacks: {
-          label: (context) => `${context.raw}%`,
+          label: (context) => `${Math.round(context.raw)}%`,
         },
       },
     },
@@ -51,9 +53,6 @@ export default function HumidityChart({ humidity = 0 }) {
       x: {
         beginAtZero: true,
         max: 100,
-        ticks: {
-          callback: (value) => `${value}%`,
-        },
       },
       y: {
         grid: {

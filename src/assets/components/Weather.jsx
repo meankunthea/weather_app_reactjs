@@ -1,4 +1,4 @@
-import search from "../icons/search.png";
+
 import clearsky from "../images/clearsky.png";
 import PhnomPenh from '../images/PhnomPenh.jpg';
 import celsious from '../images/celsious.png'
@@ -14,6 +14,7 @@ import humidity from '../images/humidity.png'
 import sunrise from '../images/sunrise.png';
 import sunset from '../images/sunset.png';
 import icon_wind from '../images/icon_wind.png'
+
 
 const cities = [
     "Phnom Penh",
@@ -49,14 +50,7 @@ export default function Weather() {
     const [week, setWeek] = useState([]);
     const [unit, setUnit] = useState('C');
     const [currentWeather, setCurrentWeather] = useState(null);
-
-
     
-    useEffect(() => {
-        if (city) {
-            handleSearch();
-        }
-    }, [city]);
 
     function formatTemp(tempC) {
         if (unit === 'C') return `${Math.round(tempC)}°C`;
@@ -72,6 +66,12 @@ export default function Weather() {
         if (code <= 82) return { icon: rain, description: 'Showers' };
         return { icon: clearsky, description: 'Windy' };
     }
+
+    useEffect(() => {
+        if (city) {
+            handleSearch();
+        }
+    }, [city]);
 
     // search function
     async function handleSearch() {
@@ -120,7 +120,7 @@ export default function Weather() {
         console.log("weatherData", weatherData);
     }
 
-
+   
 
     return (
         <div className=" w-full h-auto rounded-3xl flex">
@@ -328,39 +328,24 @@ export default function Weather() {
                         </div>
 
                         {/* Humindity card */}
-                    <div className="bg-linear-to-br from-blue-500 via-cyan-500 to-sky-400 h-56 rounded-2xl p-6 text-white shadow-xl">
-                        <h2 className="text-lg font-semibold">Humidity</h2>
-
-                        <div className="mt-4 flex items-center justify-between">
-                            <div>
-                                <p className="text-4xl font-bold">
-                                    {currentWeather ? `${currentWeather.humidity}%` : '...'}
-                                </p>
-                                <p className="text-sm text-white/80 mt-2">
-                                    Current humidity level
-                                </p>
+                        
+                         <div className="bg-linear-to-br from-red-500 via-fuchsia-500 to-orange-500 h-56 rounded-2xl p-6 text-white shadow-xl">
+                            <h2 className="text-lg font-semibold">Humindity</h2>
+                            <div className="mt-4 flex items-center justify-between">
+                                <div>
+                                    <p className="text-4xl font-bold">
+                                        {currentWeather ? `${Math.round(currentWeather.windspeed)} %` : '...'}
+                                    </p>
+                                    <p className="text-sm text-white/80 mt-2">Current humidity speed</p>
+                                </div>
+                                <div className="rounded-3xl bg-white/20 p-3">
+                                    <img className="w-10 h-10" src={humidity} alt="humidity" />
+                                </div>
                             </div>
-
-                            <div className="rounded-3xl bg-white/20 p-3">
-                                <img className="w-10 h-10" src={humidity} alt="humidity" />
+                            <div className="my-4 flex items-center gap-3">
+                                <span className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium">Humidity</span>
                             </div>
                         </div>
-
-                        <div className="my-4 flex items-center gap-3">
-                                <span className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium">
-                                    {currentWeather
-                                        ? currentWeather.humidity < 30
-                                            ? 'Dry'
-                                            : currentWeather.humidity < 60
-                                            ? 'Comfortable'
-                                            : 'Humid'
-                                        : '...'}
-                                </span>
-                                <p className="text-sm text-white/80">
-                                    Air moisture level
-                                </p>
-                        </div>
-                    </div>
 
                         {/* Visibility card */}
                         <div className="bg-linear-to-br from-red-500 via-fuchsia-500 to-orange-500 h-56 rounded-2xl p-6 text-white shadow-xl">
