@@ -143,12 +143,27 @@ export default function Weather() {
 
         if (data.current_weather) {
             const weatherInfo = getWeatherInfo(data.current_weather.weathercode);
-            const currentHourIndex = data.hourly?.time?.findIndex(
+            let currentHourIndex = data.hourly?.time?.findIndex(
                 (time) => time === data.current_weather.time
             );
-            const humidity = currentHourIndex >= 0 ? data.hourly.relativehumidity_2m[currentHourIndex] : null;
-            const visibility = currentHourIndex >= 0 ? data.hourly.visibility[currentHourIndex] : null;
-            const aqi = currentHourIndex >= 0 ? data.hourly.us_aqi?.[currentHourIndex] : null;
+
+            if ((currentHourIndex ?? -1) < 0 && data.hourly?.time) {
+                const cwTime = new Date(data.current_weather.time).getTime();
+                let bestIdx = -1;
+                let bestDiff = Infinity;
+                data.hourly.time.forEach((t, i) => {
+                    const d = Math.abs(new Date(t).getTime() - cwTime);
+                    if (d < bestDiff) {
+                        bestDiff = d;
+                        bestIdx = i;
+                    }
+                });
+                currentHourIndex = bestIdx;
+            }
+
+            const humidity = (currentHourIndex ?? -1) >= 0 ? data.hourly.relativehumidity_2m[currentHourIndex] : null;
+            const visibility = (currentHourIndex ?? -1) >= 0 ? data.hourly.visibility[currentHourIndex] : null;
+            const aqi = (currentHourIndex ?? -1) >= 0 ? data.hourly.us_aqi?.[currentHourIndex] : null;
 
             setCurrentWeather({
                 temp: data.current_weather.temperature,
