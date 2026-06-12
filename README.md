@@ -27,8 +27,8 @@
 12. Weather Highlights
     -UV Index visualization.
     -Wind status.
-    -Sunrise time.(static)
-    -Sunset time.(static)
+    -Sunrise time.
+    -Sunset time.
     -Humidity level.
     -Visibility distance.
 13. Local Storage Support
