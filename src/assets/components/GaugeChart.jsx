@@ -8,7 +8,7 @@ import {
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function GaugeChart({ value, max = 100, label = 'Value', color = '#f59e0b' }) {
+export default function GaugeChart({ value, max = 10, label = 'Value', color = '#f59e0b' }) {
   const safeValue = Math.min(Math.max(value || 0, 0), max);
   const remaining = max - safeValue;
 
@@ -38,11 +38,13 @@ export default function GaugeChart({ value, max = 100, label = 'Value', color = 
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full">
-      <Doughnut data={chartData} options={options} />
-      <div className="mt-4 text-center">
-        <p className="text-3xl font-bold text-gray-800">{Math.round(safeValue)}</p>
-        <p className="text-sm text-gray-500">{label}</p>
+    <div className="relative h-full w-full flex items-center justify-center">
+      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+        <p className="text-4xl font-bold ">{Math.round(safeValue)}</p>
+        <p className="text-sm t">{label}</p>
+      </div>
+      <div className="h-full w-full">
+        <Doughnut data={chartData} options={options} />
       </div>
     </div>
   );

@@ -1,16 +1,42 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Get API from website : https://openweathermap.org/
+2. Get icon from website: https://www.flaticon.com/
+3. Search weather by city name (all cities)
+4. Dynamic weather conditions (sunny, cloudy, rain, etc.)
+5. Clean and modern UI using Tailwind CSS
+6. Fully responsive design
+7. Using tool: vite
+8. Framework use: Reacjs
+9. Feature :
+    -Search weather by city or province name.
+    -Auto-suggestion dropdown.
+    -Search history support.
+    -Click outside to close suggestions.
+10. Temperature Conversion
+    -Switch between Celsius (°C) and Fahrenheit (°F).
+    -Instant temperature conversion across the application.
+    -7-Day Weather Forecast
+    -Displays forecast for the next 7 days.
+    -Weather icons based on forecast conditions.
+    -Daily maximum temperature.
+    -Forecast date and day information.
+11. Current Weather Information
+    -Current temperature.
+    -Weather condition description.
+    -Wind speed.
+    -Local date and time.
+12. Weather Highlights
+    -UV Index visualization.
+    -Wind status.
+    -Sunrise time.(static)
+    -Sunset time.(static)
+    -Humidity level.
+    -Visibility distance.
+13. Local Storage Support
+    -Remembers previously selected city.
+    -Stores search history for quick access.
+    -Automatically loads saved data on refresh.
+14. Functions:
+    -handleSearch(searchCity)
+    -handleCitySelect(selectedCity)
+    -getWeather(city)
+    -getWeatherImage(code)
